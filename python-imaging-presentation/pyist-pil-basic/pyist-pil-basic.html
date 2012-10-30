@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.6: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>Python-Imaging ile Temel İşlemler</title>
+<style type="text/css">
+
+.highlight .hll { background-color: #333333 }
+.highlight  { background: #111111; color: #ffffff }
+.highlight .c { color: #008800; font-style: italic; background-color: #0f140f } /* Comment */
+.highlight .err { color: #ffffff } /* Error */
+.highlight .g { color: #ffffff } /* Generic */
+.highlight .k { color: #fb660a; font-weight: bold } /* Keyword */
+.highlight .l { color: #ffffff } /* Literal */
+.highlight .n { color: #ffffff } /* Name */
+.highlight .o { color: #ffffff } /* Operator */
+.highlight .x { color: #ffffff } /* Other */
+.highlight .p { color: #ffffff } /* Punctuation */
+.highlight .cm { color: #008800; font-style: italic; background-color: #0f140f } /* Comment.Multiline */
+.highlight .cp { color: #ff0007; font-weight: bold; font-style: italic; background-color: #0f140f } /* Comment.Preproc */
+.highlight .c1 { color: #008800; font-style: italic; background-color: #0f140f } /* Comment.Single */
+.highlight .cs { color: #008800; font-style: italic; background-color: #0f140f } /* Comment.Special */
+.highlight .gd { color: #ffffff } /* Generic.Deleted */
+.highlight .ge { color: #ffffff } /* Generic.Emph */
+.highlight .gr { color: #ffffff } /* Generic.Error */
+.highlight .gh { color: #ffffff; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #ffffff } /* Generic.Inserted */
+.highlight .go { color: #444444; background-color: #222222 } /* Generic.Output */
+.highlight .gp { color: #ffffff } /* Generic.Prompt */
+.highlight .gs { color: #ffffff } /* Generic.Strong */
+.highlight .gu { color: #ffffff; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #ffffff } /* Generic.Traceback */
+.highlight .kc { color: #fb660a; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #fb660a; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #fb660a; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #fb660a } /* Keyword.Pseudo */
+.highlight .kr { color: #fb660a; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #cdcaa9; font-weight: bold } /* Keyword.Type */
+.highlight .ld { color: #ffffff } /* Literal.Date */
+.highlight .m { color: #0086f7; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #0086d2 } /* Literal.String */
+.highlight .na { color: #ff0086; font-weight: bold } /* Name.Attribute */
+.highlight .nb { color: #ffffff } /* Name.Builtin */
+.highlight .nc { color: #ffffff } /* Name.Class */
+.highlight .no { color: #0086d2 } /* Name.Constant */
+.highlight .nd { color: #ffffff } /* Name.Decorator */
+.highlight .ni { color: #ffffff } /* Name.Entity */
+.highlight .ne { color: #ffffff } /* Name.Exception */
+.highlight .nf { color: #ff0086; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #ffffff } /* Name.Label */
+.highlight .nn { color: #ffffff } /* Name.Namespace */
+.highlight .nx { color: #ffffff } /* Name.Other */
+.highlight .py { color: #ffffff } /* Name.Property */
+.highlight .nt { color: #fb660a; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #fb660a } /* Name.Variable */
+.highlight .ow { color: #ffffff } /* Operator.Word */
+.highlight .w { color: #888888 } /* Text.Whitespace */
+.highlight .mf { color: #0086f7; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0086f7; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0086f7; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0086f7; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sb { color: #0086d2 } /* Literal.String.Backtick */
+.highlight .sc { color: #0086d2 } /* Literal.String.Char */
+.highlight .sd { color: #0086d2 } /* Literal.String.Doc */
+.highlight .s2 { color: #0086d2 } /* Literal.String.Double */
+.highlight .se { color: #0086d2 } /* Literal.String.Escape */
+.highlight .sh { color: #0086d2 } /* Literal.String.Heredoc */
+.highlight .si { color: #0086d2 } /* Literal.String.Interpol */
+.highlight .sx { color: #0086d2 } /* Literal.String.Other */
+.highlight .sr { color: #0086d2 } /* Literal.String.Regex */
+.highlight .s1 { color: #0086d2 } /* Literal.String.Single */
+.highlight .ss { color: #0086d2 } /* Literal.String.Symbol */
+.highlight .bp { color: #ffffff } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #fb660a } /* Name.Variable.Class */
+.highlight .vg { color: #fb660a } /* Name.Variable.Global */
+.highlight .vi { color: #fb660a } /* Name.Variable.Instance */
+.highlight .il { color: #0086f7; font-weight: bold } /* Literal.Number.Integer.Long */
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/small-black-custom/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/small-black-custom/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/small-black-custom/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/small-black-custom/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/small-black-custom/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+
+<style type="text/css">
+#currentSlide {display: none;}
+</style>
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>Python-Imaging ile Temel İşlemler</h1>
+<h2>© Atamert Ölçgen, 2010 <a class="reference external" href="mailto:muhuk&#64;muhuk.com">muhuk&#64;muhuk.com</a> - <a class="reference external" href="http://www.pyist.net">PYist</a></h2>
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">Python-Imaging ile Temel İşlemler</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+
+</div>
+<div class="slide" id="icindekiler">
+<h1>İçindekiler</h1>
+<ul class="incremental simple">
+<li>Paket Hakkında</li>
+<li>Resimler Hakkında</li>
+<li>Suya Sabuna Dokunmayan Bir Örnek</li>
+<li>Örnek 1: İzometrik Eğriler Çizelim</li>
+<li>Örnek 2: Soyut Resim Filtresi</li>
+</ul>
+</div>
+<div class="slide" id="paket-hakkinda">
+<h1>Paket Hakkında</h1>
+<p>Python-Imaging pakedi <a class="reference external" href="http://www.python.org">Python</a> ile resim dosyaları üzerinde çalışmak için gereken fonksiyonları içerir.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">PyPI:</th><td class="field-body"><a class="reference external" href="http://pypi.python.org/pypi/PIL">http://pypi.python.org/pypi/PIL</a></td>
+</tr>
+<tr class="field"><th class="field-name">Kurulum:</th><td class="field-body"><tt class="docutils literal">pip install pil</tt></td>
+</tr>
+<tr class="field"><th class="field-name">Dökümantasyon:</th><td class="field-body"><a class="reference external" href="http://effbot.org/imagingbook/">http://effbot.org/imagingbook/</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="resimler-hakkinda-1">
+<h1>Resimler Hakkında (1)</h1>
+<div class="highlight"><pre><span class="n">image</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">width</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">,</span>
+    <span class="p">[(</span><span class="n">r0</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">b0</span><span class="p">),</span>
+     <span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">b1</span><span class="p">),</span>
+     <span class="p">(</span><span class="n">r2</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">b2</span><span class="p">),</span>
+     <span class="c"># snip</span>
+     <span class="p">(</span><span class="n">rn</span><span class="p">,</span> <span class="n">gn</span><span class="p">,</span> <span class="n">bn</span><span class="p">)]</span>
+<span class="p">)</span>
+</pre></div>
+<p class="small">Yukarıdaki veri yapısında 3 kanallı (yeşil, kırmızı, mavi) gerçek renkli bir resmi saklayabiliriz.</p>
+</div>
+<div class="slide" id="resimler-hakkinda-2">
+<h1>Resimler Hakkında (2)</h1>
+<div class="highlight"><pre><span class="n">image</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">width</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">v0</span><span class="p">,</span>
+     <span class="n">v1</span><span class="p">,</span>
+     <span class="n">v2</span><span class="p">,</span>
+     <span class="c"># snip</span>
+     <span class="n">vn</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p class="small">Tek kanallı (siyah-beyaz) resimler için.</p>
+</div>
+<div class="slide" id="suya-sabuna-dokunmayan-bir-ornek">
+<h1>Suya Sabuna Dokunmayan Bir Örnek</h1>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+
+<span class="n">image_instance</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;RGB&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c"># some awesome image manipulation code here</span>
+
+<span class="n">image_instance</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;filename.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-izometrik-egriler-cizelim">
+<h1>Örnek 1: İzometrik Eğriler Çizelim</h1>
+<p>Bir yükseklik haritasını girdi olarak kullanarak üzerine eşyükselti eğrileri yerleştireceğiz.</p>
+<div align="center" class="align-center"><img alt="img/result.png" class="align-center" src="img/result.png" /></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-1">
+<h1>Örnek 1: Gürültü Sentezi (1)</h1>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageOps</span>
+
+<span class="k">def</span> <span class="nf">create_noise</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">temporary_border</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-2">
+<h1>Örnek 1: Gürültü Sentezi (2)</h1>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">create_noise</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">temporary_border</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">temporary_border</span><span class="p">,</span>
+            <span class="n">height</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">temporary_border</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;L&#39;</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="c"># super-cool noise creation happens</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">),</span>
+                    <span class="n">Image</span><span class="o">.</span><span class="n">BICUBIC</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">temporary_border</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-3">
+<h1>Örnek 1: Gürültü Sentezi (3)</h1>
+<p><tt class="docutils literal">img</tt> resmi üzerindeki her bir piksele rastgele bir değer atıyoruz.</p>
+<div class="highlight"><pre><span class="n">img_cursor</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">img_cursor</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-4">
+<h1>Örnek 1: Gürültü Sentezi (4)</h1>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">create_noise</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">temporary_border</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">temporary_border</span><span class="p">,</span>
+            <span class="n">height</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">temporary_border</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;L&#39;</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">img_cursor</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">img_cursor</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">),</span>
+                    <span class="n">Image</span><span class="o">.</span><span class="n">BICUBIC</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">SMOOTH</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">temporary_border</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-5">
+<h1>Örnek 1: Gürültü Sentezi (5)</h1>
+<p>Bir resim ince detaylar için...</p>
+<div align="center" class="align-center"><img alt="img/noise1.png" class="align-center" src="img/noise1.png" style="width: 128.0px; height: 128.0px;" /></div>
+<div class="highlight"><pre><span class="n">noise_1</span> <span class="o">=</span> <span class="n">create_noise</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-6">
+<h1>Örnek 1: Gürültü Sentezi (6)</h1>
+<p>...bir resim daha büyük detaylar için...</p>
+<div align="center" class="align-center"><img alt="img/noise2.png" class="align-center" src="img/noise2.png" style="width: 128.0px; height: 128.0px;" /></div>
+<div class="highlight"><pre><span class="n">noise_2</span> <span class="o">=</span> <span class="n">create_noise</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-7">
+<h1>Örnek 1: Gürültü Sentezi (7)</h1>
+<p>...bir resim de en kaba detaylar için.</p>
+<div align="center" class="align-center"><img alt="img/noise3.png" class="align-center" src="img/noise3.png" style="width: 128.0px; height: 128.0px;" /></div>
+<div class="highlight"><pre><span class="n">noise_3</span> <span class="o">=</span> <span class="n">create_noise</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-8">
+<h1>Örnek 1: Gürültü Sentezi (8)</h1>
+<p>Üçünü birleştirdiğimizde doğal bir desen elde ederiz:</p>
+<div align="center" class="align-center"><img alt="img/noise_combined.png" class="align-center" src="img/noise_combined.png" style="width: 128.0px; height: 128.0px;" /></div>
+<div class="highlight"><pre><span class="n">noise_combined</span> <span class="o">=</span> <span class="n">ImageChops</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">noise_1</span><span class="p">,</span> <span class="n">noise_2</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">)</span>
+<span class="n">noise_combined</span> <span class="o">=</span> <span class="n">ImageChops</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">noise_combined</span><span class="p">,</span> <span class="n">noise_3</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">)</span>
+<span class="n">noise_combined</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;noise_combined.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-9">
+<h1>Örnek 1: Gürültü Sentezi (9)</h1>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">naive_perlin</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;L&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="mi">127</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="n">c</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">i</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">create_noise</span><span class="p">(</span><span class="n">width</span><span class="o">/</span><span class="n">f</span><span class="p">,</span> <span class="n">height</span><span class="o">/</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">ImageChops</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.333</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">autocontrast</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-gurultu-sentezi-10">
+<h1>Örnek 1: Gürültü Sentezi (10)</h1>
+<p>Yükseklik haritası için kullanacağımız gürültü resmi:</p>
+<div align="center" class="align-center"><img alt="img/noise.png" class="align-center" src="img/noise.png" style="width: 128.0px; height: 128.0px;" /></div>
+<div class="highlight"><pre><span class="n">WIDTH</span> <span class="o">=</span> <span class="n">HEIGHT</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">369147258</span><span class="p">)</span>
+<span class="n">hm_img</span> <span class="o">=</span> <span class="n">naive_perlin</span><span class="p">(</span><span class="n">WIDTH</span><span class="p">,</span> <span class="n">HEIGHT</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-izometrik-egriler-1">
+<h1>Örnek 1: İzometrik Eğriler (1)</h1>
+<p>Yükseklik haritamızdaki her pikselin değeri belli bir yüksekliğe işaret ediyor.</p>
+<p class="incremental">Aynı yükseklikteki noktaları birleştiren eğrilere <strong>eşyükselti eğrileri</strong> denir.</p>
+</div>
+<div class="slide" id="ornek-1-izometrik-egriler-2">
+<h1>Örnek 1: İzometrik Eğriler (2)</h1>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">draw_isometric_curve</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1.55</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_curve_func</span><span class="p">(</span><span class="n">p_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">threshold</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p_value</span> <span class="o">-</span> <span class="n">value</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span>
+    <span class="c"># make sure we have float and offset a little further</span>
+    <span class="n">threshold</span> <span class="o">+=</span> <span class="mf">0.05</span>
+    <span class="n">curve_img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">_curve_func</span><span class="p">)</span>
+    <span class="n">curve_img</span> <span class="o">=</span> <span class="n">curve_img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">SMOOTH_MORE</span><span class="p">)</span>
+    <span class="n">curve_img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">autocontrast</span><span class="p">(</span><span class="n">curve_img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">curve_img</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-izometrik-egriler-3">
+<h1>Örnek 1: İzometrik Eğriler (3)</h1>
+<div align="center" class="align-center"><img alt="img/contours_example.png" class="align-center" src="img/contours_example.png" /></div>
+<div class="highlight"><pre><span class="n">contours_example</span> <span class="o">=</span> <span class="n">draw_isometric_curve</span><span class="p">(</span><span class="n">noise_img</span><span class="p">,</span> <span class="mi">127</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-izometrik-egriler-4">
+<h1>Örnek 1: İzometrik Eğriler (4)</h1>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">draw_contours</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">256</span> <span class="o">/</span> <span class="n">count</span>
+    <span class="n">contours</span> <span class="o">=</span> <span class="p">[</span><span class="n">draw_isometric_curve</span><span class="p">(</span><span class="n">hm_img</span><span class="p">,</span> <span class="n">c</span><span class="o">*</span><span class="n">value</span><span class="p">)</span> \
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">ImageChops</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">contours</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-izometrik-egriler-5">
+<h1>Örnek 1: İzometrik Eğriler (5)</h1>
+<img alt="img/noise.png" src="img/noise.png" />
+<img alt="img/contours.png" src="img/contours.png" />
+<div class="highlight"><pre><span class="n">contour_img</span> <span class="o">=</span> <span class="n">draw_contours</span><span class="p">(</span><span class="n">hm_img</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-1-sonuc">
+<h1>Örnek 1: Sonuç</h1>
+<img alt="img/noise.png" src="img/noise.png" />
+<img alt="img/contours.png" src="img/contours.png" />
+<img alt="img/result.png" src="img/result.png" />
+<div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="n">ImageChops</span><span class="o">.</span><span class="n">screen</span><span class="p">(</span><span class="n">ImageOps</span><span class="o">.</span><span class="n">colorize</span><span class="p">(</span><span class="n">hm_img</span><span class="p">,</span>
+                                            <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+                                            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">196</span><span class="p">)),</span>
+                           <span class="n">ImageOps</span><span class="o">.</span><span class="n">colorize</span><span class="p">(</span><span class="n">contour_img</span><span class="p">,</span>
+                                            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                                            <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">96</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-2-soyut-resim-filtresi">
+<h1>Örnek 2: Soyut Resim Filtresi</h1>
+<img alt="img/tesla.jpeg" src="img/tesla.jpeg" style="width: 229.0px; height: 299.5px;" />
+<img alt="img/tesla_squares_coarse.png" src="img/tesla_squares_coarse.png" style="width: 229.0px; height: 299.5px;" />
+<img alt="img/tesla_squares_fine.png" src="img/tesla_squares_fine.png" style="width: 229.0px; height: 299.5px;" />
+</div>
+<div class="slide" id="ornek-2-kusbakisi">
+<h1>Örnek 2: Kuşbakışı</h1>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span><span class="p">,</span> <span class="n">ImageDraw</span>
+
+
+<span class="k">def</span> <span class="nf">square_brush</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">size_min</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">size_max</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;tesla.jpeg&#39;</span><span class="p">)</span>
+<span class="n">squares_coarse</span> <span class="o">=</span> <span class="n">square_brush</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">squares_coarse</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tesla_squares_coarse.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-2-kare-firca-filtresi-1">
+<h1>Örnek 2: Kare Fırça Filtresi (1)</h1>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">square_brush</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">size_min</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">size_max</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;RGB&#39;</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">img_cursor</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">MedianFilter</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+        <span class="n">searching</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">while</span> <span class="n">searching</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">searching</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">searching</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">box_size</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">size_min</span><span class="p">,</span> <span class="n">size_max</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">box_size</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="n">box_size</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">box_size</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">box_size</span><span class="p">)</span>
+        <span class="n">draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">img_cursor</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-2-kare-firca-filtresi-2">
+<h1>Örnek 2: Kare Fırça Filtresi (2)</h1>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">square_brush</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">size_min</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">size_max</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;RGB&#39;</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">img_cursor</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">MedianFilter</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="c"># classy yet sexy brush strokes</span>
+    <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-2-kare-firca-filtresi-3">
+<h1>Örnek 2: Kare Fırça Filtresi (3)</h1>
+<div class="highlight"><pre><span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+    <span class="n">searching</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="c">## start of modified code ##</span>
+    <span class="c"># Naive implementation</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c">## end of modified code ##</span>
+    <span class="n">box_size</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">size_min</span><span class="p">,</span> <span class="n">size_max</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">box_size</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="n">box_size</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">box_size</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">box_size</span><span class="p">)</span>
+    <span class="n">draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">img_cursor</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-2-kare-firca-filtresi-4">
+<h1>Örnek 2: Kare Fırça Filtresi (4)</h1>
+<div class="highlight"><pre><span class="n">searching</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="n">searching</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">searching</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">searching</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-2-ilk-deneme">
+<h1>Örnek 2: İlk Deneme</h1>
+<img alt="img/tesla.jpeg" src="img/tesla.jpeg" style="width: 229.0px; height: 299.5px;" />
+<img alt="img/tesla_squares_coarse.png" src="img/tesla_squares_coarse.png" style="width: 229.0px; height: 299.5px;" />
+<div class="highlight"><pre><span class="n">squares_coarse</span> <span class="o">=</span> <span class="n">square_brush</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="ornek-2-biraz-daha-donanim-katalim">
+<h1>Örnek 2: Biraz Daha Donanım Katalım</h1>
+<img alt="img/tesla.jpeg" src="img/tesla.jpeg" style="width: 229.0px; height: 299.5px;" />
+<img alt="img/tesla_squares_fine.png" src="img/tesla_squares_fine.png" style="width: 229.0px; height: 299.5px;" />
+<div class="highlight"><pre><span class="n">squares_fine</span> <span class="o">=</span> <span class="n">square_brush</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">9000</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="slide" id="bitti">
+<h1>Bitti</h1>
+<p class="center"><span class="big">Teşekkür ederim.</span></p>
+</div>
+</div>
+</body>
+</html>

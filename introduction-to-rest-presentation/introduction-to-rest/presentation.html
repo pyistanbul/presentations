@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.6: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>reST'e Giriş</title>
+<style type="text/css">
+
+.highlight .hll { background-color: #333333 }
+.highlight  { background: #111111; color: #ffffff }
+.highlight .c { color: #008800; font-style: italic; background-color: #0f140f } /* Comment */
+.highlight .err { color: #ffffff } /* Error */
+.highlight .g { color: #ffffff } /* Generic */
+.highlight .k { color: #fb660a; font-weight: bold } /* Keyword */
+.highlight .l { color: #ffffff } /* Literal */
+.highlight .n { color: #ffffff } /* Name */
+.highlight .o { color: #ffffff } /* Operator */
+.highlight .x { color: #ffffff } /* Other */
+.highlight .p { color: #ffffff } /* Punctuation */
+.highlight .cm { color: #008800; font-style: italic; background-color: #0f140f } /* Comment.Multiline */
+.highlight .cp { color: #ff0007; font-weight: bold; font-style: italic; background-color: #0f140f } /* Comment.Preproc */
+.highlight .c1 { color: #008800; font-style: italic; background-color: #0f140f } /* Comment.Single */
+.highlight .cs { color: #008800; font-style: italic; background-color: #0f140f } /* Comment.Special */
+.highlight .gd { color: #ffffff } /* Generic.Deleted */
+.highlight .ge { color: #ffffff } /* Generic.Emph */
+.highlight .gr { color: #ffffff } /* Generic.Error */
+.highlight .gh { color: #ffffff; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #ffffff } /* Generic.Inserted */
+.highlight .go { color: #444444; background-color: #222222 } /* Generic.Output */
+.highlight .gp { color: #ffffff } /* Generic.Prompt */
+.highlight .gs { color: #ffffff } /* Generic.Strong */
+.highlight .gu { color: #ffffff; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #ffffff } /* Generic.Traceback */
+.highlight .kc { color: #fb660a; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #fb660a; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #fb660a; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #fb660a } /* Keyword.Pseudo */
+.highlight .kr { color: #fb660a; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #cdcaa9; font-weight: bold } /* Keyword.Type */
+.highlight .ld { color: #ffffff } /* Literal.Date */
+.highlight .m { color: #0086f7; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #0086d2 } /* Literal.String */
+.highlight .na { color: #ff0086; font-weight: bold } /* Name.Attribute */
+.highlight .nb { color: #ffffff } /* Name.Builtin */
+.highlight .nc { color: #ffffff } /* Name.Class */
+.highlight .no { color: #0086d2 } /* Name.Constant */
+.highlight .nd { color: #ffffff } /* Name.Decorator */
+.highlight .ni { color: #ffffff } /* Name.Entity */
+.highlight .ne { color: #ffffff } /* Name.Exception */
+.highlight .nf { color: #ff0086; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #ffffff } /* Name.Label */
+.highlight .nn { color: #ffffff } /* Name.Namespace */
+.highlight .nx { color: #ffffff } /* Name.Other */
+.highlight .py { color: #ffffff } /* Name.Property */
+.highlight .nt { color: #fb660a; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #fb660a } /* Name.Variable */
+.highlight .ow { color: #ffffff } /* Operator.Word */
+.highlight .w { color: #888888 } /* Text.Whitespace */
+.highlight .mf { color: #0086f7; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0086f7; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0086f7; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0086f7; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sb { color: #0086d2 } /* Literal.String.Backtick */
+.highlight .sc { color: #0086d2 } /* Literal.String.Char */
+.highlight .sd { color: #0086d2 } /* Literal.String.Doc */
+.highlight .s2 { color: #0086d2 } /* Literal.String.Double */
+.highlight .se { color: #0086d2 } /* Literal.String.Escape */
+.highlight .sh { color: #0086d2 } /* Literal.String.Heredoc */
+.highlight .si { color: #0086d2 } /* Literal.String.Interpol */
+.highlight .sx { color: #0086d2 } /* Literal.String.Other */
+.highlight .sr { color: #0086d2 } /* Literal.String.Regex */
+.highlight .s1 { color: #0086d2 } /* Literal.String.Single */
+.highlight .ss { color: #0086d2 } /* Literal.String.Symbol */
+.highlight .bp { color: #ffffff } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #fb660a } /* Name.Variable.Class */
+.highlight .vg { color: #fb660a } /* Name.Variable.Global */
+.highlight .vi { color: #fb660a } /* Name.Variable.Instance */
+.highlight .il { color: #0086f7; font-weight: bold } /* Literal.Number.Integer.Long */
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/small-black-custom/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/small-black-custom/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/small-black-custom/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/small-black-custom/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/small-black-custom/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+
+<style type="text/css">
+#currentSlide {display: none;}
+</style>
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>reST'e Giriş</h1>
+<h2>© Atamert Ölçgen, 2010 <a class="reference external" href="mailto:muhuk&#64;pyist.com">muhuk&#64;pyist.com</a> - <a class="reference external" href="http://www.pyist.net">PYist</a></h2>
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">reST'e Giriş</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+
+</div>
+<div class="slide" id="icindekiler">
+<h1>İçindekiler</h1>
+<ul class="incremental simple">
+<li>Neden Düz Metin?</li>
+<li>Biçimleme Dilleri</li>
+<li>reST Yazım Kuralları</li>
+<li>reST ile Neler Yapılabilir?</li>
+</ul>
+</div>
+<div class="slide" id="neden-duz-metin">
+<h1>Neden Düz Metin?</h1>
+<ul class="incremental simple">
+<li>Kontrol</li>
+<li>İşlenebilirlik</li>
+<li>Kalıcılık</li>
+<li>Geçerlilik</li>
+</ul>
+</div>
+<div class="slide" id="bicimleme-dilleri">
+<h1>Biçimleme Dilleri</h1>
+<dl class="docutils">
+<dt>Smart ASCII</dt>
+<dd>Biçim bilgisi taşıyan sade metinler.</dd>
+</dl>
+</div>
+<div class="slide" id="bicimleme-dilleri-markdown">
+<h1>Biçimleme Dilleri: Markdown</h1>
+<div class="highlight"><pre># Başlık
+
+Paragraf [bağlantı](http://www.adres.com).
+
+* Liste 1
+* Liste 2
+</pre></div>
+<div class="section" id="baslik">
+<h2>Başlık</h2>
+<p>Paragraf <a class="reference external" href="http://www.adres.com">bağlantı</a>.</p>
+<ul class="simple">
+<li>Liste 1</li>
+<li>Liste 2</li>
+</ul>
+</div>
+</div>
+<div class="slide" id="id1">
+<h1>Biçimleme Dilleri: Markdown</h1>
+<ul class="simple">
+<li>Minimalist</li>
+<li>Metin yönelimli</li>
+<li>Geniş kitlelerce kullanılıyor</li>
+</ul>
+</div>
+<div class="slide" id="bicimleme-dilleri-wiki">
+<h1>Biçimleme Dilleri: Wiki</h1>
+<div class="highlight"><pre><span class="gh">=</span> Başlık <span class="gh">=</span>
+Paragraf <span class="k">[[http://www.adres.com|bağlantı]]</span>
+
+ <span class="nb">*</span> Liste 1
+ <span class="nb">*</span> Liste 2
+</pre></div>
+<div class="section" id="id2">
+<h2>Başlık</h2>
+<p>Paragraf <a class="reference external" href="http://www.adres.com">bağlantı</a>.</p>
+<ul class="simple">
+<li>Liste 1</li>
+<li>Liste 2</li>
+</ul>
+</div>
+</div>
+<div class="slide" id="id4">
+<h1>Biçimleme Dilleri: Wiki</h1>
+<ul class="simple">
+<li>Kapsamlı gramer</li>
+<li>Birbirine bağlı web sayfaları oluşturmak için</li>
+<li>Wikipedia (2001)</li>
+</ul>
+</div>
+<div class="slide" id="bicimleme-dilleri-rest">
+<h1>Biçimleme Dilleri: reST</h1>
+<div class="highlight"><pre><span class="gh">Başlık</span>
+<span class="gh">======</span>
+Paragraf <span class="s">`bağlantı </span><span class="si">&lt;http://www.adres.com&gt;</span><span class="s">`_</span>.
+
+<span class="m">*</span> Liste 1
+<span class="m">*</span> Liste 2
+</pre></div>
+<div class="section" id="id5">
+<h2>Başlık</h2>
+<p>Paragraf <a class="reference external" href="http://www.adres.com">bağlantı</a>.</p>
+<ul class="simple">
+<li>Liste 1</li>
+<li>Liste 2</li>
+</ul>
+</div>
+</div>
+<div class="slide" id="id7">
+<h1>Biçimleme Dilleri: reST</h1>
+<ul class="simple">
+<li>Genişletilebilir</li>
+<li>Döküman tabanlı</li>
+<li>Python</li>
+</ul>
+</div>
+<div class="slide" id="rest-yazim-kurallari-tablolar">
+<h1>reST Yazım Kuralları: Tablolar</h1>
+<div class="highlight"><pre>+------------+------------+-----------+
+<span class="o">|</span> Sütun 1    | Sütun 2    | Sütun 3   |
++============+============+===========+
+<span class="o">|</span> A          | B          | C         |
++------------+------------+-----------+
+<span class="o">|</span> A2         | Birden fazla sütunda   |
++------------+------------+-----------+
+<span class="o">|</span> A3         | Birden     | - hücre   |
++------------+ fazla      | - blok    |
+<span class="o">|</span> A4         | saturda    | - içeriyor|
++------------+------------+-----------+
+</pre></div>
+</div>
+<div class="slide" id="id8">
+<h1>reST Yazım Kuralları: Tablolar</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="34%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Sütun 1</th>
+<th class="head">Sütun 2</th>
+<th class="head">Sütun 3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>A</td>
+<td>B</td>
+<td>C</td>
+</tr>
+<tr><td>A2</td>
+<td colspan="2">Birden fazla sütunda</td>
+</tr>
+<tr><td>A3</td>
+<td rowspan="2">Birden
+fazla
+saturda</td>
+<td rowspan="2"><ul class="first last simple">
+<li>hücre</li>
+<li>blok</li>
+<li>içeriyor</li>
+</ul>
+</td>
+</tr>
+<tr><td>A4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="rest-yazim-kurallari-sekiller">
+<h1>reST Yazım Kuralları: Şekiller</h1>
+<div class="highlight"><pre><span class="p">..</span> <span class="ow">figure</span><span class="p">::</span> img/pony-magic.png
+   <span class="nc">:scale:</span> <span class="nf">25 %</span>
+   <span class="nc">:alt:</span> <span class="nf">Pony Magic</span>
+
+   Resim altyazıları
+
+   <span class="nc">:image:</span> <span class="nf">Resim için.</span>
+   :figure: Altyazı ile birlikte
+</pre></div>
+</div>
+<div class="slide" id="id9">
+<h1>reST Yazım Kuralları: Şekiller</h1>
+<div class="figure">
+<img alt="Pony Magic" src="img/pony-magic.png" style="width: 120.0px; height: 113.4px;" />
+<p class="caption">Resim altyazıları</p>
+<div class="legend">
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">image:</th><td class="field-body">Resim için.</td>
+</tr>
+<tr class="field"><th class="field-name">figure:</th><td class="field-body">Altyazı ile birlikte</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="slide" id="rest-yazim-kurallari-alintilar">
+<h1>reST Yazım Kuralları: Alıntılar</h1>
+<div class="highlight"><pre>Alıntı:
+
+<span class="p">..</span> <span class="ow">pull-quote</span><span class="p">::</span>
+
+    I paint objects as I think them, not as I see them.
+
+    -- Pablo Picasso
+</pre></div>
+</div>
+<div class="slide" id="id10">
+<h1>reST Yazım Kuralları: Alıntılar</h1>
+<p>Alıntı:</p>
+<blockquote class="pull-quote">
+<p>I paint objects as I think them, not as I see them.</p>
+<p class="attribution">&mdash;Pablo Picasso</p>
+</blockquote>
+</div>
+<div class="slide" id="rest-yazim-kurallari-altbilgi">
+<h1>reST Yazım Kuralları: Altbilgi</h1>
+<div class="highlight"><pre><span class="p">..</span> <span class="ow">footer</span><span class="p">::</span> © Atamert Ölçgen, 2010 muhuk@pyist.com - <span class="s">`PYist </span><span class="si">&lt;http://www.pyist.net&gt;</span><span class="s">`_</span>
+</pre></div>
+</div>
+<div class="slide" id="rest-yazim-kurallari-roller">
+<h1>reST Yazım Kuralları: Roller</h1>
+<div class="highlight"><pre><span class="na">:pep-reference:</span><span class="nv">`8`</span>&#39;e uyum <span class="na">:strong:</span><span class="nv">`zorunludur`</span>.
+</pre></div>
+<p><a class="reference external" href="http://www.python.org/dev/peps/pep-0008">PEP 8</a>'e uyum <strong>zorunludur</strong>.</p>
+</div>
+<div class="slide" id="rest-ile-neler-yapilabilir">
+<h1>reST ile Neler Yapılabilir</h1>
+<ul class="incremental simple">
+<li>Dökümantasyon<ul class="incremental">
+<li>HTML, PDF, XML...</li>
+<li><a class="reference external" href="http://www.pyist.net">PYist.net</a></li>
+<li>Docstring ayıklama</li>
+</ul>
+</li>
+<li><tt class="docutils literal">rst2s5</tt> ile sunumlar</li>
+<li>SKS'ler ile birlikte</li>
+</ul>
+</div>
+<div class="slide" id="bitti">
+<h1>Bitti</h1>
+<p class="center"><span class="big">Teşekkür ederim.</span></p>
+</div>
+</div>
+</body>
+</html>
