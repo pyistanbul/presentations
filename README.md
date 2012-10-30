@@ -1,0 +1,1 @@
+Bu depoda toplantıların sunum dosyaları bulunmaktadır.
