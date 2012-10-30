@@ -16,7 +16,7 @@ Bu depoda toplantıların sunum dosyaları bulunmaktadır.
 
 ------------------------------------
 
-### Celery & RabbitMQ
+### RabbitMQ & Celery
 
 26 Mayıs 2012 - Fatih Erikli
 
@@ -24,7 +24,7 @@ Bu depoda toplantıların sunum dosyaları bulunmaktadır.
 
 ------------------------------------
 
-### Haystack - Solr
+### Django'da Haystack + Apache Solr
 
 25 Mart 2012 - Taylan Pince
 
