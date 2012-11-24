@@ -5,7 +5,7 @@ Bu depoda toplantıların sunum dosyaları bulunmaktadır.
 
 24 Kasım 2012 - Alper Kanat
 
-<https://github.com/pyistanbul/presentations/tree/master/django-301>
+<https://github.com/pyistanbul/presentations/tree/master/django-301-presentation>
 
 ------------------------------------
 
