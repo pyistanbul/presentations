@@ -1,0 +1,149 @@
+/*
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+
+Default style is changed into django style by Alper Kanat <alperkanat@raptiye.org>
+*/
+
+pre {
+    max-height: 400px;
+}
+
+pre code {
+    display: block;
+    padding: 0.5em;
+    background: #487858;
+    font-family: 'Source Code Pro', sans-serif;
+    border-radius: 5px;
+    font-size: 14px;
+    max-height: 380px;
+    overflow-y: scroll;
+}
+
+pre code,
+pre .subst,
+pre .tag .title,
+pre .lisp .title,
+pre .clojure .built_in,
+pre .nginx .title {
+    color: #F8F8F8;
+}
+
+pre .string,
+pre .title,
+pre .constant,
+pre .parent,
+pre .tag .value,
+pre .rules .value,
+pre .rules .value .number,
+pre .preprocessor,
+pre .ruby .symbol,
+pre .ruby .symbol .string,
+pre .aggregate,
+pre .template_tag,
+pre .django .variable,
+pre .smalltalk .class,
+pre .addition,
+pre .flow,
+pre .stream,
+pre .bash .variable,
+pre .apache .tag,
+pre .apache .cbracket,
+pre .tex .command,
+pre .tex .special,
+pre .erlang_repl .function_or_atom,
+pre .markdown .header {
+    color: #FFC757;
+}
+
+pre .comment,
+pre .annotation,
+pre .template_comment,
+pre .diff .header,
+pre .chunk,
+pre .markdown .blockquote {
+    color: #90BA9E;
+}
+
+pre .number,
+pre .date,
+pre .regexp,
+pre .literal,
+pre .smalltalk .symbol,
+pre .smalltalk .char,
+pre .go .constant,
+pre .change,
+pre .markdown .bullet,
+pre .markdown .link_url {
+    color: #94DA3A;
+}
+
+pre .label,
+pre .javadoc,
+pre .ruby .string,
+pre .decorator,
+pre .filter .argument,
+pre .localvars,
+pre .array,
+pre .attr_selector,
+pre .important,
+pre .pseudo,
+pre .pi,
+pre .doctype,
+pre .deletion,
+pre .envvar,
+pre .shebang,
+pre .apache .sqbracket,
+pre .nginx .built_in,
+pre .tex .formula,
+pre .erlang_repl .reserved,
+pre .prompt,
+pre .markdown .link_label,
+pre .vhdl .attribute,
+pre .clojure .attribute,
+pre .coffeescript .property {
+    color: #88F
+}
+
+pre .keyword,
+pre .id,
+pre .phpdoc,
+pre .title,
+pre .built_in,
+pre .aggregate,
+pre .css .tag,
+pre .javadoctag,
+pre .phpdoc,
+pre .yardoctag,
+pre .smalltalk .class,
+pre .winutils,
+pre .bash .variable,
+pre .apache .tag,
+pre .go .typename,
+pre .tex .command,
+pre .markdown .strong,
+pre .request,
+pre .status {
+    font-weight: bold;
+}
+
+pre .keyword {
+    color: #9AEF3F;
+}
+
+pre .markdown .emphasis {
+    font-style: italic;
+}
+
+pre .nginx .built_in {
+    font-weight: normal;
+}
+
+pre .coffeescript .javascript,
+pre .javascript .xml,
+pre .tex .formula,
+pre .xml .javascript,
+pre .xml .vbscript,
+pre .xml .css,
+pre .xml .cdata {
+    opacity: 0.5;
+}

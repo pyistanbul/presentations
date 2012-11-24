@@ -1,0 +1,522 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=1024" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="description" content="" />
+        <meta name="author" content="Alper Kanat" />
+
+        <link rel="icon" href="assets/images/favicon.ico">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic|Source+Code+Pro:400,700">
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/impress/impress.css">
+        <link rel="stylesheet" href="assets/css/highlight.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <script type="text/javascript" src="assets/js/highlight.pack.js"></script>
+        <script type="text/javascript">
+            hljs.tabReplace = '    ';
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="text/javascript" src="assets/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="assets/js/yepnope.1.5.4-min.js"></script>
+        <script type="text/javascript" src="assets/js/present.js"></script>
+
+        <title>Karanlık Taraftan Aydınlığa Geçiş: django 301</title>
+    </head>
+
+    <body class="impress-not-supported">
+        <div class="fallback-message">
+            <p>
+                Tarayıcınız, maalesef <b>bu sunumun gerektirdiği özellikleri desteklememektedir</b>,
+                bu nedenle sunumun basitleştirilmiş halini görmektesiniz.
+            </p>
+
+            <p>
+                Daha iyi bir deneyim için lütfen <b>Chrome</b>, <b>Safari</b>
+                ya da <b>Firefox</b> tarayıcılarından birini kullanınız.
+            </p>
+        </div>
+
+        <div id="impress">
+            <div id="welcome" class="step slide center" data-x="-1000" data-y="-1500">
+                Karanlık Taraftan Aydınlığa Geçiş
+                <b>django 301</b>
+                <br>
+                <span class="small">Alper Kanat &laquo;tunix@raptiye.org&raquo;</span>
+            </div>
+
+            <div id="about-me" class="step slide" data-x="500" data-y="-1500">
+                <h1 class="title">Hakkımda</h1>
+                <ul>
+                    <li>CTO, Butigo</li>
+                    <li>
+                        Github: <a href="https://github.com/tunix" target="_blank">https://github.com/tunix</a>
+                    </li>
+                    <li>Yazılım Geliştirici</li>
+                    <li>
+                        Twitter: <a href="https://twitter.com/tunix" target="_blank">https://twitter.com/tunix</a>
+                    </li>
+                    <li>Arch Linux Kullanıcısı</li>
+                    <li>Bilgisayar Mühendisi, Işık Üniversitesi</li>
+                    <li>
+                        Blog: <a href="http://raptiye.org" target="_blank">http://raptiye.org</a>
+                    </li>
+                    <li>Özgür Yazılım Destekçisi</li>
+                </ul>
+            </div>
+
+            <div id="index" class="step slide" data-x="3000" data-y="1500" data-scale="10">
+                <h1 class="title">İstek İşleme</h1>
+                <ul>
+                    <li>Ara Katman (Middleware)</li>
+                    <li>Adresleme (URL Routing)</li>
+                    <li>Sınıf Tabanlı Görüntü Katmanı (Class Based Views)</li>
+                    <li>Tema Çizimi: Etiketler &amp; Filtreler</li>
+                    <li>Django Güzellikleri</li>
+                </ul>
+            </div>
+
+            <div id="middleware" class="step slide" data-x="1500" data-y="-2100" data-z="-2000" data-rotate="180">
+                <h1 class="title">Ara Katman (Middleware)</h1>
+                <ul>
+                    <li>process_request()</li>
+                    <li>process_view()</li>
+                    <li>process_template_response()</li>
+                    <li>process_response()</li>
+                    <li>process_exception()</li>
+                </ul>
+            </div>
+
+            <div id="process-request" class="step slide" data-x="1500" data-y="-2500" data-z="-4000" data-rotate="360">
+                <h1 class="title">process_request()</h1>
+                <pre><code>
+    class RequestLogMiddleware(object):
+        TAG = u'REQUEST'
+
+        def process_request(self, request):
+            # don't log in debug mode
+            if settings.DEBUG:
+                return None
+
+            path = request.get_full_path()
+            method = request.method
+            ip = request.META.get('REMOTE_ADDR', '')
+            ua = request.META.get('HTTP_USER_AGENT', '')
+
+            log.info(u'[%s] Path: [%s], Method: [%s], IP: [%s], User Agent: [%s]',
+                self.TAG, path, method, ip, ua)
+                    </code>
+                </pre>
+            </div>
+
+            <div id="process-view" class="step slide" data-x="1500" data-y="-3000" data-z="-6000" data-rotate="540">
+                <h1 class="title">process_view()</h1>
+                <p>From CsrfViewMiddleware's code:</p>
+                <pre><code>
+        def process_view(self, request, callback, callback_args, callback_kwargs):
+            if getattr(request, 'csrf_processing_done', False):
+                return None
+
+            try:
+                csrf_token = _sanitize_token(
+                    request.COOKIES[settings.CSRF_COOKIE_NAME])
+                # Use same token next time
+                request.META['CSRF_COOKIE'] = csrf_token
+            except KeyError:
+                csrf_token = None
+                # Generate token and store it in the request, so it's
+                # available to the view.
+                request.META["CSRF_COOKIE"] = _get_new_csrf_key()
+
+            # Wait until request.META["CSRF_COOKIE"] has been manipulated before
+            # bailing out, so that get_token still works
+            if getattr(callback, 'csrf_exempt', False):
+                return None
+
+            # Assume that anything not defined as 'safe' by RC2616 needs protection
+            if request.method not in ('GET', 'HEAD', 'OPTIONS', 'TRACE'):
+                if getattr(request, '_dont_enforce_csrf_checks', False):
+                    # Mechanism to turn off CSRF checks for test suite.
+                    # It comes after the creation of CSRF cookies, so that
+                    # everything else continues to work exactly the same
+                    # (e.g. cookies are sent, etc.), but before any
+                    # branches that call reject().
+                    return self._accept(request)
+
+                if request.is_secure():
+                    ...
+                    </code>
+                </pre>
+            </div>
+
+            <div id="process-template-response" class="step slide" data-x="1500" data-y="-3500" data-z="-8000" data-rotate="720">
+                <h1 class="title">process_template_response()</h1>
+                <p>
+                    <code>TemplateResponse</code> sınıfı ya da <code>render()</code> metodunu içeren herhangi bir sınıfı
+                    kullanarak, yapılan isteğe karşılık verilecek olan cevabın değiştirilebilmesini mümkün kılar.
+                </p>
+            </div>
+
+            <div id="process-response" class="step slide" data-x="1500" data-y="-4000" data-z="-10000" data-rotate="900">
+                <h1 class="title">process_response()</h1>
+                <pre><code>
+    class FlatpageFallbackMiddleware(object):
+        def process_response(self, request, response):
+            if response.status_code != 404:
+                return response  # No need to check for a flatpage for non-404 responses.
+
+            try:
+                return flatpage(request, request.path_info)
+            except Http404:
+                # Return the original response if any errors happened. Because this
+                # is a middleware, we can't assume the errors will be caught elsewhere.
+                return response
+            except:
+                if settings.DEBUG:
+                    raise
+
+                return response
+                    </code>
+                </pre>
+            </div>
+
+            <div id="process-exception" class="step slide" data-x="1500" data-y="-4500" data-z="-12000" data-rotate="1080">
+                <h1 class="title">process_exception()</h1>
+                <p>
+                    Görüntü katmanından Exception fırlatılması durumunda, django'nun kendi hata yakalama
+                    mekanizması devreye girmeden önce müdahele edebilmemizi sağlar.
+                </p>
+            </div>
+
+            <div id="url-routing" class="step slide" data-x="3500" data-y="-2100" data-z="-2000">
+                <h1 class="title">Adresleme (URL Routing)</h1>
+                <ul>
+                    <li>
+                        Adresleme nasıl çalışır?
+
+                        <ul>
+                            <li>İsim Alanı (namespace)</li>
+                            <li>Düzenli İfadeler (regex)</li>
+                        </ul>
+                    </li>
+                    <li>Örnek Adresleme</li>
+                    <li>reverse() &amp; {% url %}</li>
+                </ul>
+            </div>
+
+            <div id="url-routing-namespaces" class="step slide" data-x="3800" data-y="-2450" data-z="-4000" data-rotate="180">
+                <h1 class="title">İsim Alanı (namespace)</h1>
+
+                <p>
+                    Çünkü özellikle modüllerle çalışıldığında <code>urls.py</code> içerisinde aynı adı kullanan
+                    adresler olma ihtimali oldukça yüksek.
+                </p>
+
+                <pre><code>
+    urlpatterns = patterns('',
+        url(r'^$', 'raptiye.blog.views.index', name="index"),
+
+        (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+        (r'^admin/', include(admin.site.urls)),
+
+        (r'^blog/', include('raptiye.blog.urls', namespace='blog', app_name='blog'))
+    )
+                </code></pre>
+            </div>
+
+            <div id="url-routing-regex" class="step slide" data-x="4100" data-y="-2900" data-z="-6000" data-rotate="360">
+                <h1 class="title">Düzenli İfadeler (regex)</h1>
+
+                <p>
+                    <code>urls.py</code> içerisine yazılan düzenli ifadeler, adresteki belli alanları
+                    yakalayarak bunların hangi görüntü katmanı tarafından çağırılacağını belirtir ve
+                    gerekli olan parametreleri tanımlar.
+                </p>
+
+                <pre><code>
+    # main page of blog
+    url(r'^$', ListView.as_view(**{
+        'queryset': get_latest_entries(),
+        'template_name': '%s/homepage.html' % settings.TEMPLATE_NAME,
+        'paginate_by': settings.ENTRIES_PER_PAGE,
+        'context_object_name': 'entries'
+    }), name='index'),
+
+    # archives for blogs..
+    url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/$', DayArchiveView.as_view(**{
+        'queryset': get_latest_entries(),
+        'date_field': 'datetime',
+        'month_format': '%m',
+        'allow_empty': True,
+        'context_object_name': "entries",
+        'allow_future': True,
+        'paginate_by': settings.ENTRIES_PER_PAGE,
+        'template_name': '%s/entries_for_day.html' % settings.TEMPLATE_NAME,
+    }), name='entries_on_date'),
+    # an entry on a specific date
+    url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[\w\d-]+)/$', DateDetailView.as_view(**{
+        'queryset': get_latest_entries(),
+        'date_field': 'datetime',
+        'month_format': '%m',
+        'context_object_name': "entry",
+        'allow_future': True,
+        'template_name': '%s/detail.html' % settings.TEMPLATE_NAME
+    }), name='show_post'),
+                </code></pre>
+            </div>
+
+            <div id="url-routing-utils" class="step slide" data-x="4400" data-y="-3450" data-z="-8000" data-rotate="540">
+                <h1 class="title">reverse() &amp; {% url %}</h1>
+
+                <p>
+                    django, geliştiricilerin hayatını kolaylaştırmak üzere pek çok küçük araçla birlikte
+                    gelir. Çatı dahilindeki tüm fonksiyonlar da bu araçlardan faydalanırlar.
+                </p>
+
+                <pre><code>
+    def index(request):
+        return redirect("blog:index", permanent=True)
+
+    cellValue = '<a href="%s" class="%s">%d</a>' % (
+        reverse("blog:entries_on_date", args=[self.year, self.month, self.day]),
+        self.cssClass,
+        day
+    ) if self.haveObjForDate() else "%d" % day
+                </code></pre>
+
+                <pre><code>
+    {% if next_day %}
+        &lt;div class="align_right smallplus"&gt;
+            {% with next_day as nd %}
+                &lt;a href="{% url blog:entries_on_date nd.year, nd.month, nd.day %}"&gt;Sonraki Gün&lt;/a&gt;
+            {% endwith %}
+        &lt;/div&gt;
+    {% endif %}
+                </code></pre>
+            </div>
+
+            <div id="class-based-views-before" class="step slide" data-x="5000" data-y="-2100" data-z="-2000">
+                <h1 class="title">Sınıf Tabanlı Görüntü Katmanı</h1>
+
+                <p>
+                    Öncesi: Fonksiyonel programlama..
+                </p>
+
+                <pre><code>
+    def search(request, template_name="search.html"):
+        "Search against all entries using the given keywords"
+
+        keywords = request.GET.get("keywords", "")
+        result = search_against_entries(keywords)
+
+        params = {
+            "queryset": result,
+            "template_name": template_name,
+            "template_object_name": "entry",
+            "paginate_by": settings.ENTRIES_PER_PAGE,
+            "extra_context": {
+                "keywords": keywords
+            }
+        }
+
+        return object_list(request, **params)
+                </code></pre>
+            </div>
+
+            <div id="class-based-views-after" class="step slide" data-x="5300" data-y="-2450" data-z="-4000" data-rotate="180">
+                <h1 class="title">Sınıf Tabanlı Görüntü Katmanı</h1>
+
+                <p>Sonrası: Sınıf Tabanlı Yapıya Geçiş..</p>
+
+                <pre><code>
+    class CodeView(JSONResponseMixin, BaseTemplateView):
+        template_name = 'code.html'
+        app_class = PromoCodeApplication
+
+        @method_decorator(like_required)
+        def doRequest(self, request, *args, **kwargs):
+            return super(CodeView, self).get(request, *args, **kwargs)
+
+        def render_to_response(self, context):
+            contentType = ContentType.objects.get_for_model(self.app)
+            facebook = self.request.facebook
+            promoCode = {
+                'code': '',
+                'error': False
+            }
+
+            if facebook and facebook.isAuthorized():
+                log.debug(u'User authorized the app! Setting authorization flag..')
+                log.debug(u'Checking if user already exists in our db..')
+                ...
+                </code></pre>
+            </div>
+
+            <div id="class-based-views-example-1" class="step slide" data-x="5600" data-y="-2800" data-z="-6000" data-rotate="360">
+                <h1 class="title">Sınıf Tabanlı Görüntü Katmanı Örneği</h1>
+
+                <pre><code>
+    class BaseTemplateView(AppMixin, FacebookMixin, BaseView, TemplateView):
+        'Base template view we use for views'
+
+        template_name = 'default.html'
+
+        @method_decorator(csrf_exempt)
+        def dispatch(self, request, *args, **kwargs):
+            request = self.appSetter(request, *args, **kwargs)
+            request = self.initFacebook(request)
+            log.debug(u'Running BaseView.dispatch for final request settings..')
+            return BaseView.dispatch(self, request, *args, **kwargs)
+
+        def get_context_data(self, **kwargs):
+            context = TemplateView.get_context_data(self, **kwargs)
+            context.update(self.updateContext())
+            return context
+
+        def post(self, request, *args, **kwargs):
+            'Implementing this for Facebook POST requests'
+            log.debug(u'POST successfully executed! Finalizing request..')
+            return self.get(request, *args, **kwargs)
+                </code></pre>
+            </div>
+
+            <div id="class-based-views-example-2" class="step slide" data-x="5900" data-y="-3150" data-z="-8000" data-rotate="540">
+                <h1 class="title">Sınıf Tabanlı Görüntü Katmanı Örneği</h1>
+
+                <p>
+                    Özel durumlar haricinde sınıfları değiştirmeniz gerekmediği için yazmanız gereken
+                    görüntüleme katmanı, bu yeni yapı sayesinde dramatik şekilde kısalıyor.
+                </p>
+
+                <pre><code>
+    class IndexView(TemplateView):
+        template_name = 'welcome.html'
+                </code></pre>
+            </div>
+
+            <div id="class-based-views-urls-mapping" class="step slide" data-x="6200" data-y="-3400" data-z="-10000" data-rotate="720">
+                <h1 class="title">Görüntü Katmanı - Adresleme</h1>
+
+                <pre><code>
+    urlpatterns = patterns('',
+        url(r'^$', IndexView.as_view(), name='index'),
+        url(r'^(?P&lt;aid&gt;\d+)/$', IndexView.as_view(), name='index'),
+
+        url(r'^code/$', CodeView.as_view(), name='code'),
+        url(r'^(?P&lt;aid&gt;\d+)/code/$', CodeView.as_view(), name='code'),
+
+        url(r'^unlike/$', UnlikeView.as_view(), name='unlike'),
+        url(r'^(?P&lt;aid&gt;\d+)/unlike/$', UnlikeView.as_view(), name='unlike'),
+    )
+                </code></pre>
+            </div>
+
+            <div id="template-rendering" class="step slide" data-x="6500" data-y="-2100" data-z="-2000">
+                <h1 class="title">Tema Çizimi: Etiketler & Filtreler</h1>
+
+                <p>
+                    django, jinja2 adındaki tema motorunu kullanır ve geliştiricilerin hayatını
+                    kolaylaştıracak pek çok araçla birlikte gelir.
+                </p>
+
+                <pre><code>
+    {% for link in flatpages %}
+        &lt;li class="{% if forloop.last %}last{% endif %}"&gt;
+            &lt;a href="{{ link.url }}"&gt;{{ link.title }}&lt;/a&gt;
+        &lt;/li&gt;
+    {% endfor %}
+
+    {% regroup entries|dictsortreversed:"sticky" by sticky as ordered_events %}
+
+    &lt;div class="blog_entry_content blog_text"&gt;
+        {{ content|emotions|safe|truncatewords_html:150 }}
+    &lt;/div&gt;
+                </code></pre>
+            </div>
+
+            <div id="template-rendering-custom" class="step slide" data-x="6800" data-y="-2450" data-z="-4000" data-rotate="180">
+                <h1 class="title">Özel Etiket & Filtreler</h1>
+
+                <p>
+                    Tüm etiket ve filtreler yine birer python fonksiyonu ya da sınıfı olduklarından
+                    özelleştirilmeleri ya da yenilerinin yazılması oldukça kolay.
+                </p>
+
+                <pre><code>
+    @register.filter
+    def is_installed(app):
+        return is_app_installed(app)
+
+    @register.filter
+    def emotions(entry):
+        if not settings.ENABLE_EMOTIONS:
+            return entry
+
+        icons = {
+            ":)": "%simages/smiley/face-smile.png" % settings.STATIC_URL,
+            ":|": "%simages/smiley/face-plain.png" % settings.STATIC_URL,
+            ":(": "%simages/smiley/face-sad.png" % settings.STATIC_URL,
+            ":D": "%simages/smiley/face-grin.png" % settings.STATIC_URL,
+            ";-)": "%simages/smiley/face-wink.png" % settings.STATIC_URL,
+        }
+
+        for smiley, src in icons.iteritems():
+            entry = entry.replace(smiley, " &lt;img src='%s' align='absmiddle'&gt; " % (src))
+
+        return entry
+
+    @register.inclusion_tag('%s/timeline.html' % settings.TEMPLATE_NAME, takes_context=True)
+    def timeline(context):
+        years = []
+        months = [(i, month_name[i]) for i in range(1, 13)]
+        currentMonth = context.get('month')
+
+        if Entry.objects.exists():
+            min_year = Entry.objects.order_by('datetime')[0].datetime.year
+            current_year = date.today().year
+            years = range(min_year, current_year + 1)
+            years.reverse()
+
+        return {
+            'years': years,
+            'months': months,
+            'currentMonth': currentMonth
+        }
+
+    @register.simple_tag
+    def calculate_age():
+        return (date.today() - settings.BIRTH_DATE).days / 365
+                </code></pre>
+            </div>
+
+            <div id="goodies" class="step slide" data-x="8000" data-y="-2100" data-z="-2000">
+                <h1 class="title">Django Güzellikleri</h1>
+
+                <ul>
+                    <li>Yönetim Paneli</li>
+                    <li>CSRF, tıklama çalma, kriptografik imzalama vb. güvenlik mekanizmaları</li>
+                    <li>Yorum, moderasyon, mesajlaşma, basit sayfalar, RSS/Atom vb. dahili uygulamalar</li>
+                    <li>Geliştirici dostu dahili (i18n, Humanize, Local Flavor, lipsum vb.) kütüphaneler</li>
+                    <li>Sinyaller, statik dosyalar, önbellekleme</li>
+                </ul>
+            </div>
+
+            <div id="thanks" class="step slide" data-x="3000" data-y="4800" data-z="-2000">
+                <h1 class="title center single">Teşekkürler ☺</h1>
+            </div>
+        </div>
+
+        <a href="https://github.com/tunix" style="position: absolute; top: 0; right: 0; border: 0;"
+            target="_blank"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
+            alt="Fork me on GitHub"></a>
+
+        <script type="text/javascript" src="assets/impress/impress.js"></script>
+        <script type="text/javascript">
+            // running it in the footer.. really? yuck! :S
+            impress().init();
+        </script>
+    </body>
+</html>

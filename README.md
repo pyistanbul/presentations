@@ -1,6 +1,14 @@
 Bu depoda toplantıların sunum dosyaları bulunmaktadır.
 
 
+### Django 301
+
+24 Kasım 2012 - Alper Kanat
+
+<https://github.com/pyistanbul/presentations/tree/master/django-301>
+
+------------------------------------
+
 ### Django ORM Optimizasyon
 
 24 Kasım 2012 - Fatih Erikli
