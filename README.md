@@ -1,5 +1,12 @@
 Bu depoda toplantıların sunum dosyaları bulunmaktadır.
 
+### Nasil Calisiyorum?
+
+24 Kasim 2012 - Cihan Okyay
+
+<https://github.com/pyistanbul/presentations/tree/master/nasil-calisiyorum>
+
+------------------------------------
 
 ### Django 301
 
