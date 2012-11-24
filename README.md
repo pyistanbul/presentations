@@ -1,5 +1,14 @@
 Bu depoda toplantıların sunum dosyaları bulunmaktadır.
 
+
+### Django ORM Optimizasyon
+
+24 Kasım 2012 - Fatih Erikli
+
+<https://github.com/pyistanbul/presentations/tree/master/django-orm-optimization>
+
+------------------------------------
+
 ### Python ile Meta Programlama
 
 23 Haziran 2012 - Burak Yiğit Kaya
