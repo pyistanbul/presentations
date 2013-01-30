@@ -44,7 +44,8 @@ Bu depoda toplantıların sunum dosyaları bulunmaktadır.
 
 26 Mayıs 2012 - Berker Peksağ
 
-<https://github.com/pyistanbul/presentations/tree/master/pypy-presentation>
+* [HTML](http://berkerpeksag.github.com/slides/pypy-101-pyist/)
+* [PDF](https://github.com/pyistanbul/presentations/tree/master/pypy-presentation)
 
 ------------------------------------
 
