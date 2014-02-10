@@ -1,0 +1,3 @@
+[submodule "graphite-presentation/demo"]
+	path = graphite-presentation/demo
+	url = https://github.com/ybrs/graphite-statsd-presentation.git
