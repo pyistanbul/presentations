@@ -1,3 +1,6 @@
 [submodule "graphite-presentation/demo"]
 	path = graphite-presentation/demo
 	url = https://github.com/ybrs/graphite-statsd-presentation.git
+[submodule "pyistanbul-ansible"]
+	path = pyistanbul-ansible
+	url = https://github.com/cihann/pyistanbul-ansible
